@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infofrankrijk & Nederlanders.fr</title>
+    <style>
+        /* --- 1. FONTS & VARIABELEN --- */
+        @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&family=Poppins:wght@600;700&display=swap');
+
+        :root {
+            --primary: #800000;       /* Kastanjebruin */
+            --primary-light-bg: #f9ebeb; /* Heel lichte variant van #800000 */
+            --accent-yellow: #FFFACD; /* Zacht geel */
+            --text: #333333;
+            --white: #ffffff;
+            --border-color: #e0e0e0;
+            --gray-bg: #f8f9fa;
+        }
+
+        /* --- 2. ALGEMENE STIJL --- */
+        body {
+            font-family: 'Mulish', sans-serif;
+            line-height: 1.8em;
+            color: var(--text);
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary);
+            margin-top: 0;
+            line-height: 1.3em;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p { margin-bottom: 1.2em; }
+
+        /* --- 3. CONTAINER --- */
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- 4. TAB NAVIGATIE --- */
+        .tab-nav {
+            display: flex;
+            background-color: #eee;
+            border-bottom: 3px solid var(--primary);
+            flex-wrap: wrap;
+        }
+
+        .tab-link {
+            flex: 1;
+            padding: 20px;
+            border: none;
+            background: #eee;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #666;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .tab-link:hover {
+            background-color: #e0e0e0;
+            color: var(--primary);
+        }
+
+        .tab-link.active {
+            background-color: var(--white);
+            color: var(--primary);
+            border-top: 4px solid var(--primary);
+            margin-top: -4px;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.6s;
+            flex-grow: 1;
+        }
+
+        /* --- 5. INTENTIE BOX (TAB 1) --- */
+        .intentie-box {
+            background-color: var(--primary-light-bg);
+            border-left: 6px solid var(--primary);
+            padding: 25px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 40px;
+        }
+
+        .intentie-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.3em;
+            color: var(--primary);
+            display: block;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .intentie-subtitle {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #444;
+            line-height: 1.5em;
+        }
+
+        /* --- 6. GRID / TEGELS --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .tile {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tile:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+
+        .tile h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--accent-yellow);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .tile p {
+            font-size: 0.95rem;
+            margin: 0;
+            color: #555;
+        }
+
+        .tile-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* --- 7. MODERNISERINGS BLOCK (TAB 1) --- */
+        .update-block {
+            background-color: var(--gray-bg);
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .update-block h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* --- 8. CTA BUTTONS --- */
+        .appeal-text {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-footer {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            transition: background 0.3s;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: #600000;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .tab-link { width: 100%; text-align: left; padding: 15px; }
+            .tab-content { padding: 20px; }
+            .cta-footer { flex-direction: column; }
+            .btn { width: 100%; box-sizing: border-box; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <h1>Een dynamische 2-eenheid</h1>
+
+    <div class="tab-nav">
+        <button class="tab-link active" onclick="openTab(event, 'Tab1')">1. Heden, verleden en toekomst</button>
+        <button class="tab-link" onclick="openTab(event, 'Tab2')">2. Over Nederlanders.fr</button>
+        <button class="tab-link" onclick="openTab(event, 'Tab3')">3. Infofrankrijk.com</button>
+    </div>
+
+    <div id="Tab1" class="tab-content" style="display: block;">
+        
+        <div class="intentie-box">
+            <span class="intentie-title">Onze Intentie</span>
+            <span class="intentie-subtitle">Wij hebben het vaste voornemen om de toekomst van deze twee waardevolle kennisbronnen zeker te stellen.</span>
+        </div>
+
+        <div class="grid-container">
+            <div class="tile">
+                <div class="tile-icon">💬</div>
+                <h4>Het Hart (Nederlanders.fr)</h4>
+                <p>Met Nederlanders.fr bieden we een interactief topic-forum waar vragen gesteld en antwoorden gegeven worden. Waar u korte verhalen zult vinden en kunt delen. Het forum is een plek waar u landgenoten kunt ontmoeten.</p>
+            </div>
+            
+            <div class="tile">
+                <div class="tile-icon">🧠</div>
+                <h4>Het Hoofd (Infofrankrijk)</h4>
+                <p>U beschikt over een actueel archief van kennis en informatie over "Wonen en Leven". Toegang tot dossiers, rekenmodules en live-feeds van Franse overheden. Vanaf 2026: uw eigen "Wonen en Leven Dossier".</p>
+            </div>
+
+            <div class="tile">
+                <div class="tile-icon">🏛️</div>
+                <h4>25 Jaar Ervaring</h4>
+                <p>Wij zijn niet gisteren begonnen. Beide websites zijn ontstaan in 2000 en 2001. Dit is geen statisch archief, maar een levend organisme. Het 'à la une' houden van de content is een continue proces en terugkerende taak.</p>
+            </div>
+        </div>
+
+        <div class="update-block">
+            <h3>Modernisering & Toekomst</h3>
+            <p>In het afgelopen jaar is hard gewerkt aan het actualiseren van de content van Infofrankrijk. Deze is ook toekomstbestendig gemaakt. U treft interactieve tools aan die de gebruiker kunnen helpen om inzicht en meer kennis te krijgen over zaken die contextueel (persoons- en situatie-gerelateerd) passen bij het scenario dat door de gebruiker zelf wordt geschetst.</p>
+            
+            <p>Dossiers werden - en worden - actueel gemaakt. De gebruikersinterface werd professioneler en vooral rustiger gemaakt. Infofrankrijk.com zal bovendien onafhankelijk zijn van adverteerders, marketing-algoritmes en sponsors.</p>
+            
+            <p>Ook heeft een moderniseringsslag achter de schermen van Nederlanders.fr plaatsgevonden. Misschien minder zichtbaar maar, wees verzekerd, daardoor is een robuuste forum-omgeving ontstaan die toekomstbestendig is.</p>
+        </div>
+
+        <div class="appeal-text">
+            Wij hopen op uw betrokkenheid en waardering. Help ons mee om de instandhouding van de websites te bekostigen.
+        </div>
+
+        <div class="cta-footer">
+            <a href="https://infofrankrijk.tempurl.host/abonnement/" class="btn">Word Abonnee</a>
+            <a href="https://www.nederlanders.fr/page/fundraising-en-donaties" class="btn">Word Donateur</a>
+        </div>
+    </div>
+
+    <div id="Tab2" class="tab-content">
+        <h2>Over Nederlanders.fr</h2>
+        <p>Dé online gemeenschap van Nederlandstaligen in Frankrijk. Met 25.000+ leden en 300.000 pageviews per maand. <br><strong>Kostendekking via sponsoring, advertenties van leden en solidariteitsbijdragen (donaties).</strong></p>
+        
+        <div class="grid-container">
+            <div class="tile">
+                <div class="tile-icon">💬</div>
+                <h4>Het interactieve forum</h4>
+                <p>Dagelijks worden nieuwe berichten geplaatst, vaak nadat de plaatser werd geholpen met de opmaak. Iedere dag verwelkomen we nieuwe leden. We staan 365 dagen per jaar klaar om een - hopelijk onzichtbare - moderatorrol te vervullen.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">🚗</div>
+                <h4>Vervoersmarkt</h4>
+                <p>Een actieve marktplaats voor de Liftcentrale, uitwisseling van treinkaartjes en transport van pakketjes tot complete inboedels.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">📰</div>
+                <h4>Nieuwsdienst</h4>
+                <p>Dagelijks geselecteerd nieuws uit meer dan 100 bronnen (kranten, blogs), relevant voor onze bezoekers.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">📍</div>
+                <h4>De Nedergids</h4>
+                <p>Op zoek naar een Nederlands sprekende aannemer of makelaar? De Nedergids biedt het overzicht.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">👥</div>
+                <h4>Groepen</h4>
+                <p>Van regionale groepen (per departement) tot "Special interest" groepen voor hobby's en thema's.</p>
+            </div>
+        </div>
+
+        <div class="cta-footer">
+            <a href="https://infofrankrijk.tempurl.host/abonnement/" class="btn">Word Abonnee</a>
+            <a href="https://www.nederlanders.fr/page/fundraising-en-donaties" class="btn">Word Donateur</a>
+        </div>
+    </div>
+
+    <div id="Tab3" class="tab-content">
+        <h2>Infofrankrijk.com</h2>
+        <p>Toegang tot unieke tools, rekenmodules en dossiers. Kostendekking via abonnement.</p>
+
+        <div class="grid-container">
+            <div class="tile">
+                <div class="tile-icon">📚</div>
+                <h4>Archief</h4>
+                <p>Een gestructureerd en doorzoekbaar archief. Actualisering vindt nu en in de toekomst dagelijks plaats.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">🛠️</div>
+                <h4>Klussen</h4>
+                <p>Een rijke kennisbron voor klussers in Frankrijk. 20+ jaar aan "Frankrijkkennis" van ervaren klussers.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">🏠</div>
+                <h4>Vastgoedgidsen</h4>
+                <p>Duidelijke handleidingen voor het kopen - en verkopen - van vastgoed in Frankrijk.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">💼</div>
+                <h4>Diverse dossiers</h4>
+                <p>Diepgaande dossiers over ondernemen, klussen, wonen, leven, integreren enz.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">🔢</div>
+                <h4>Diverse rekentools</h4>
+                <p>Koppelingen met Franse databases, financiële simulatie-instrumenten, Plus value berekeningen en vastgoedtransactiekosten.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">⚡</div>
+                <h4>Simulatietools</h4>
+                <p>Geavanceerde simulatiemodellen (zoals energieverbruik) met koppelingen naar betrouwbare Franse bronnen.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">🗺️</div>
+                <h4>In de buurt</h4>
+                <p>Met invoer van uw postcode krijgt u direct een overzicht van overheden en handige adressen in uw eigen buurt.</p>
+            </div>
+            <div class="tile">
+                <div class="tile-icon">🔐</div>
+                <h4>Persoonlijk Dashboard</h4>
+                <p><em>(Voorjaar 2026)</em> U maakt uw eigen dashboard met informatie die voor u relevant is, met opslag op uw eigen computer.</p>
+            </div>
+        </div>
+
+        <div class="cta-footer">
+            <a href="https://infofrankrijk.tempurl.host/abonnement/" class="btn">Word Abonnee</a>
+            <a href="https://www.nederlanders.fr/page/fundraising-en-donaties" class="btn">Word Donateur</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        
+        // Hide all content
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Deactivate all buttons
+        tablinks = document.getElementsByClassName("tab-link");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show current tab and activate button
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+</script>
+
+</body>
+</html>
