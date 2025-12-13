@@ -57,12 +57,18 @@
             flex-direction: column;
         }
 
-        /* --- 4. TAB NAVIGATIE --- */
+        /* --- 4. TAB NAVIGATIE (NU FLOATING / STICKY) --- */
         .tab-nav {
             display: flex;
             background-color: #eee;
             border-bottom: 3px solid var(--primary);
             flex-wrap: wrap;
+            
+            /* DIT MAAKT HEM FLOATING: */
+            position: sticky; 
+            top: 0;
+            z-index: 1000; /* Zorgt dat hij boven de content blijft */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtiel schaduwtje als hij zweeft */
         }
 
         .tab-link {
