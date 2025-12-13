@@ -10,7 +10,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&family=Poppins:wght@600;700&display=swap');
 
         :root {
-            --primary: #800000;       /* Kastanjebruin */
+            --primary: #800000;
             --primary-light-bg: #f9ebeb; 
             --accent-yellow: #FFFACD; 
             --text: #333333;
@@ -51,24 +51,31 @@
             background: var(--white);
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            overflow: hidden;
+            
+            /* BELANGRIJKE CORRECTIE: overflow: hidden is WEGgehaald.
+               Hierdoor kan de navigatiebalk weer 'sticky' zijn. */
             min-height: 80vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- 4. TAB NAVIGATIE (NU FLOATING / STICKY) --- */
+        /* --- 4. TAB NAVIGATIE (NU ECHT STICKY) --- */
         .tab-nav {
             display: flex;
             background-color: #eee;
             border-bottom: 3px solid var(--primary);
             flex-wrap: wrap;
             
-            /* DIT MAAKT HEM FLOATING: */
-            position: sticky; 
+            /* Sticky settings */
+            position: -webkit-sticky; /* Voor Safari */
+            position: sticky;
             top: 0;
-            z-index: 1000; /* Zorgt dat hij boven de content blijft */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtiel schaduwtje als hij zweeft */
+            z-index: 1000;
+            
+            /* Omdat we overflow:hidden bij de container hebben weggehaald,
+               moeten we hier de ronde hoekjes boven terugzetten: */
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
         }
 
         .tab-link {
@@ -83,7 +90,15 @@
             cursor: pointer;
             transition: 0.3s;
             text-align: center;
+            
+            /* Zorgt dat de eerste en laatste knop ook ronde hoekjes volgen */
+            border-radius: 8px 8px 0 0; 
         }
+
+        /* Zorgt dat de hoekjes bij de linkerkant netjes zijn */
+        .tab-link:first-child { border-top-left-radius: 8px; }
+        /* Zorgt dat de hoekjes bij de rechterkant netjes zijn */
+        .tab-link:last-child { border-top-right-radius: 8px; }
 
         .tab-link:hover {
             background-color: #e0e0e0;
@@ -95,6 +110,8 @@
             color: var(--primary);
             border-top: 4px solid var(--primary);
             margin-top: -4px;
+            /* Active tab heeft geen ronde hoekjes aan de onderkant nodig, 
+               want hij loopt over in de content */
         }
 
         .tab-content {
@@ -104,7 +121,7 @@
             flex-grow: 1;
         }
 
-        /* --- 5. INTENTIE BOX (TAB 1) --- */
+        /* --- 5. INTENTIE BOX --- */
         .intentie-box {
             background-color: var(--primary-light-bg);
             border-left: 6px solid var(--primary);
@@ -174,7 +191,7 @@
             color: var(--primary);
         }
 
-        /* --- 7. MODERNISERINGS BLOCK (TAB 1) --- */
+        /* --- 7. UPDATE BLOCK --- */
         .update-block {
             background-color: var(--gray-bg);
             border: 1px solid #ddd;
@@ -230,7 +247,8 @@
 
         /* RESPONSIVE */
         @media (max-width: 768px) {
-            .tab-link { width: 100%; text-align: left; padding: 15px; }
+            .tab-link { width: 100%; text-align: left; padding: 15px; border-radius: 0; }
+            .tab-nav { border-radius: 8px 8px 0 0; }
             .tab-content { padding: 20px; }
             .cta-footer { flex-direction: column; }
             .btn { width: 100%; box-sizing: border-box; }
