@@ -27,6 +27,7 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
+            scroll-behavior: smooth; /* Zorgt voor soepel scrollen */
         }
 
         h1, h2, h3, h4 {
@@ -51,29 +52,21 @@
             background: var(--white);
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            
-            /* BELANGRIJKE CORRECTIE: overflow: hidden is WEGgehaald.
-               Hierdoor kan de navigatiebalk weer 'sticky' zijn. */
             min-height: 80vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- 4. TAB NAVIGATIE (NU ECHT STICKY) --- */
+        /* --- 4. TAB NAVIGATIE (STICKY) --- */
         .tab-nav {
             display: flex;
             background-color: #eee;
             border-bottom: 3px solid var(--primary);
             flex-wrap: wrap;
-            
-            /* Sticky settings */
-            position: -webkit-sticky; /* Voor Safari */
+            position: -webkit-sticky;
             position: sticky;
             top: 0;
             z-index: 1000;
-            
-            /* Omdat we overflow:hidden bij de container hebben weggehaald,
-               moeten we hier de ronde hoekjes boven terugzetten: */
             border-radius: 8px 8px 0 0;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
         }
@@ -90,14 +83,10 @@
             cursor: pointer;
             transition: 0.3s;
             text-align: center;
-            
-            /* Zorgt dat de eerste en laatste knop ook ronde hoekjes volgen */
             border-radius: 8px 8px 0 0; 
         }
 
-        /* Zorgt dat de hoekjes bij de linkerkant netjes zijn */
         .tab-link:first-child { border-top-left-radius: 8px; }
-        /* Zorgt dat de hoekjes bij de rechterkant netjes zijn */
         .tab-link:last-child { border-top-right-radius: 8px; }
 
         .tab-link:hover {
@@ -110,8 +99,6 @@
             color: var(--primary);
             border-top: 4px solid var(--primary);
             margin-top: -4px;
-            /* Active tab heeft geen ronde hoekjes aan de onderkant nodig, 
-               want hij loopt over in de content */
         }
 
         .tab-content {
@@ -245,6 +232,30 @@
             background-color: #600000;
         }
 
+        /* --- 9. TERUG NAAR BOVEN KNOP --- */
+        #backToTopBtn {
+            display: none; /* Verborgen tot scroll */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+            border: none;
+            outline: none;
+            background-color: var(--primary);
+            color: white;
+            cursor: pointer;
+            padding: 12px 15px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        #backToTopBtn:hover {
+            background-color: #500000;
+            transform: scale(1.1);
+        }
+
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .tab-link { width: 100%; text-align: left; padding: 15px; border-radius: 0; }
@@ -261,6 +272,8 @@
     </style>
 </head>
 <body>
+
+<div id="top"></div>
 
 <div class="main-container">
     <h1>Een dynamische 2-eenheid</h1>
@@ -410,6 +423,8 @@
 
 </div>
 
+<button onclick="topFunction()" id="backToTopBtn" title="Terug naar boven">⬆</button>
+
 <script>
     function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
@@ -429,6 +444,26 @@
         // Show current tab and activate button
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
+    }
+
+    // --- TERUG NAAR BOVEN SCRIPT ---
+    var mybutton = document.getElementById("backToTopBtn");
+
+    // Wanneer de gebruiker 100px scrollt in de IFRAME, toon knop
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // Wanneer op de knop wordt geklikt
+    function topFunction() {
+        document.body.scrollTop = 0; // Voor Safari
+        document.documentElement.scrollTop = 0; // Voor Chrome, Firefox, IE en Opera
     }
 </script>
 
