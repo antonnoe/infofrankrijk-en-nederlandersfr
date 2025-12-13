@@ -27,7 +27,8 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
-            scroll-behavior: smooth; /* Zorgt voor soepel scrollen */
+            padding-bottom: 80px; /* Extra ruimte voor het zwevende menu */
+            scroll-behavior: smooth;
         }
 
         h1, h2, h3, h4 {
@@ -57,7 +58,7 @@
             flex-direction: column;
         }
 
-        /* --- 4. TAB NAVIGATIE (STICKY) --- */
+        /* --- 4. TAB NAVIGATIE (BOVENAAN - BLIJFT OOK STICKY) --- */
         .tab-nav {
             display: flex;
             background-color: #eee;
@@ -69,6 +70,13 @@
             z-index: 1000;
             border-radius: 8px 8px 0 0;
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
+        }
+
+        /* Ankerpunt voor het scrollen */
+        #scroll-anchor {
+            position: absolute;
+            top: -20px;
+            left: 0;
         }
 
         .tab-link {
@@ -89,23 +97,15 @@
         .tab-link:first-child { border-top-left-radius: 8px; }
         .tab-link:last-child { border-top-right-radius: 8px; }
 
-        .tab-link:hover {
-            background-color: #e0e0e0;
-            color: var(--primary);
-        }
-
-        .tab-link.active {
-            background-color: var(--white);
-            color: var(--primary);
-            border-top: 4px solid var(--primary);
-            margin-top: -4px;
-        }
+        .tab-link:hover { background-color: #e0e0e0; color: var(--primary); }
+        .tab-link.active { background-color: var(--white); color: var(--primary); border-top: 4px solid var(--primary); margin-top: -4px; }
 
         .tab-content {
             display: none;
             padding: 40px;
             animation: fadeIn 0.6s;
             flex-grow: 1;
+            position: relative; /* Voor het ankerpunt */
         }
 
         /* --- 5. INTENTIE BOX --- */
@@ -124,13 +124,6 @@
             color: var(--primary);
             display: block;
             font-family: 'Poppins', sans-serif;
-        }
-
-        .intentie-subtitle {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #444;
-            line-height: 1.5em;
         }
 
         /* --- 6. GRID / TEGELS --- */
@@ -152,31 +145,10 @@
             flex-direction: column;
         }
 
-        .tile:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border-color: var(--primary);
-        }
-
-        .tile h4 {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            border-bottom: 2px solid var(--accent-yellow);
-            padding-bottom: 5px;
-            display: inline-block;
-        }
-
-        .tile p {
-            font-size: 0.95rem;
-            margin: 0;
-            color: #555;
-        }
-
-        .tile-icon {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
+        .tile:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.08); border-color: var(--primary); }
+        .tile h4 { font-size: 1.1rem; margin-bottom: 10px; border-bottom: 2px solid var(--accent-yellow); padding-bottom: 5px; display: inline-block; }
+        .tile p { font-size: 0.95rem; margin: 0; color: #555; }
+        .tile-icon { font-size: 1.5rem; margin-bottom: 10px; color: var(--primary); }
 
         /* --- 7. UPDATE BLOCK --- */
         .update-block {
@@ -186,11 +158,7 @@
             border-radius: 8px;
             margin-bottom: 30px;
         }
-
-        .update-block h3 {
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
+        .update-block h3 { margin-bottom: 15px; font-size: 1.3rem; }
 
         /* --- 8. CTA BUTTONS --- */
         .appeal-text {
@@ -227,42 +195,75 @@
             min-width: 200px;
             text-align: center;
         }
+        .btn:hover { background-color: #600000; }
 
-        .btn:hover {
-            background-color: #600000;
-        }
-
-        /* --- 9. TERUG NAAR BOVEN KNOP --- */
-        #backToTopBtn {
-            display: none; /* Verborgen tot scroll */
+        /* --- 9. ZWEVEND ONDER-MENU (DOCK) --- */
+        .floating-dock {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+            display: flex;
+            gap: 15px;
             z-index: 9999;
+            border: 1px solid #ddd;
+        }
+
+        .dock-btn {
+            background: none;
             border: none;
-            outline: none;
-            background-color: var(--primary);
-            color: white;
             cursor: pointer;
-            padding: 12px 15px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: background-color 0.3s, transform 0.3s;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: #666;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
-        #backToTopBtn:hover {
-            background-color: #500000;
-            transform: scale(1.1);
+        .dock-btn:hover {
+            background-color: var(--primary-light-bg);
+            color: var(--primary);
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .tab-link { width: 100%; text-align: left; padding: 15px; border-radius: 0; }
-            .tab-nav { border-radius: 8px 8px 0 0; }
-            .tab-content { padding: 20px; }
-            .cta-footer { flex-direction: column; }
-            .btn { width: 100%; box-sizing: border-box; }
+        .dock-btn.active {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .dock-separator {
+            width: 1px;
+            background-color: #ddd;
+            margin: 0 5px;
+        }
+
+        /* Mobiel aanpassing voor dock */
+        @media (max-width: 600px) {
+            .floating-dock {
+                width: 90%;
+                justify-content: space-between;
+                bottom: 10px;
+                padding: 10px;
+            }
+            .dock-btn {
+                padding: 8px;
+                font-size: 0.8rem;
+            }
+            .btn-text { display: none; } /* Verberg tekst op heel klein scherm, toon alleen icon/nummer */
+            .dock-btn::after { content: attr(data-label); } /* Fallback als text weg is */
+        }
+        @media (min-width: 601px) {
+            .btn-text { display: inline; }
+            .dock-btn::after { content: ""; }
         }
 
         @keyframes fadeIn {
@@ -273,14 +274,14 @@
 </head>
 <body>
 
-<div id="top"></div>
-
 <div class="main-container">
     <h1>Een dynamische 2-eenheid</h1>
 
+    <div id="nav-anchor"></div>
+
     <div class="tab-nav">
-        <button class="tab-link active" onclick="openTab(event, 'Tab1')">1. Heden, verleden en toekomst</button>
-        <button class="tab-link" onclick="openTab(event, 'Tab2')">2. Over Nederlanders.fr</button>
+        <button class="tab-link active" onclick="openTab(event, 'Tab1')">1. Heden & Toekomst</button>
+        <button class="tab-link" onclick="openTab(event, 'Tab2')">2. Nederlanders.fr</button>
         <button class="tab-link" onclick="openTab(event, 'Tab3')">3. Infofrankrijk.com</button>
     </div>
 
@@ -288,7 +289,7 @@
         
         <div class="intentie-box">
             <span class="intentie-title">Onze Intentie</span>
-            <span class="intentie-subtitle">Wij hebben het vaste voornemen om de toekomst van deze twee waardevolle kennisbronnen zeker te stellen.</span>
+            <span style="font-size: 1.1rem; font-weight: 600; color: #444;">Wij hebben het vaste voornemen om de toekomst van deze twee waardevolle kennisbronnen zeker te stellen.</span>
         </div>
 
         <div class="grid-container">
@@ -314,9 +315,7 @@
         <div class="update-block">
             <h3>Modernisering & Toekomst</h3>
             <p>In het afgelopen jaar is hard gewerkt aan het actualiseren van de content van Infofrankrijk. Deze is ook toekomstbestendig gemaakt. U treft interactieve tools aan die de gebruiker kunnen helpen om inzicht en meer kennis te krijgen over zaken die contextueel (persoons- en situatie-gerelateerd) passen bij het scenario dat door de gebruiker zelf wordt geschetst.</p>
-            
             <p>Dossiers werden - en worden - actueel gemaakt. De gebruikersinterface werd professioneler en vooral rustiger gemaakt. Infofrankrijk.com zal bovendien onafhankelijk zijn van adverteerders, marketing-algoritmes en sponsors.</p>
-            
             <p>Ook heeft een moderniseringsslag achter de schermen van Nederlanders.fr plaatsgevonden. Misschien minder zichtbaar maar, wees verzekerd, daardoor is een robuuste forum-omgeving ontstaan die toekomstbestendig is.</p>
         </div>
 
@@ -423,47 +422,76 @@
 
 </div>
 
-<button onclick="topFunction()" id="backToTopBtn" title="Terug naar boven">⬆</button>
+<div class="floating-dock">
+    <button class="dock-btn active" id="dock-btn-1" onclick="dockNav('Tab1', 'dock-btn-1')" data-label="1">
+        <span class="btn-text">1. Visie</span>
+    </button>
+    <button class="dock-btn" id="dock-btn-2" onclick="dockNav('Tab2', 'dock-btn-2')" data-label="2">
+        <span class="btn-text">2. NL.fr</span>
+    </button>
+    <button class="dock-btn" id="dock-btn-3" onclick="dockNav('Tab3', 'dock-btn-3')" data-label="3">
+        <span class="btn-text">3. InfoFR</span>
+    </button>
+    <div class="dock-separator"></div>
+    <button class="dock-btn" onclick="scrollToNav()">
+        ⬆
+    </button>
+</div>
 
 <script>
+    // Algemene Functie om Tabs te wisselen
     function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
         
-        // Hide all content
+        // Verberg alles
         tabcontent = document.getElementsByClassName("tab-content");
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
         }
 
-        // Deactivate all buttons
+        // Deactiveer top navigatie buttons
         tablinks = document.getElementsByClassName("tab-link");
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
 
-        // Show current tab and activate button
+        // Toon nieuwe tab
         document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-    // --- TERUG NAAR BOVEN SCRIPT ---
-    var mybutton = document.getElementById("backToTopBtn");
-
-    // Wanneer de gebruiker 100px scrollt in de IFRAME, toon knop
-    window.onscroll = function() {scrollFunction()};
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-            mybutton.style.display = "block";
+        
+        // Activeer de juiste knop in de TOP navigatie
+        // (We doen dit door te zoeken naar de button die deze functie aanroept)
+        if (evt && evt.currentTarget) {
+             evt.currentTarget.className += " active";
         } else {
-            mybutton.style.display = "none";
+            // Als de functie via het Dock wordt aangeroepen, moeten we de top-nav knop handmatig vinden
+            var topNavBtnIndex = tabName.replace("Tab", "") - 1; // Tab1 -> index 0
+            if(tablinks[topNavBtnIndex]) {
+                tablinks[topNavBtnIndex].className += " active";
+            }
         }
     }
 
-    // Wanneer op de knop wordt geklikt
-    function topFunction() {
-        document.body.scrollTop = 0; // Voor Safari
-        document.documentElement.scrollTop = 0; // Voor Chrome, Firefox, IE en Opera
+    // Functie voor het ZWEVENDE MENU (Dock)
+    function dockNav(tabName, btnId) {
+        // 1. Open de tab (gebruik null als evt omdat we geen click event van de top-nav hebben)
+        openTab(null, tabName);
+
+        // 2. Scroll naar boven (naar de tabs)
+        scrollToNav();
+
+        // 3. Update active state van het DOCK zelf
+        var dockBtns = document.getElementsByClassName("dock-btn");
+        for (var i = 0; i < dockBtns.length; i++) {
+            dockBtns[i].className = dockBtns[i].className.replace(" active", "");
+        }
+        document.getElementById(btnId).className += " active";
+    }
+
+    // Scroll functie
+    function scrollToNav() {
+        document.getElementById('nav-anchor').scrollIntoView({ 
+            behavior: 'smooth' 
+        });
     }
 </script>
 
