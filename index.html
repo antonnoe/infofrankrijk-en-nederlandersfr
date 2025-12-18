@@ -27,7 +27,7 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
-            padding-bottom: 80px; /* Extra ruimte voor het zwevende menu */
+            padding-bottom: 80px;
             scroll-behavior: smooth;
         }
 
@@ -35,6 +35,7 @@
             font-family: 'Poppins', sans-serif;
             color: var(--primary);
             margin-top: 0;
+            margin-bottom: 1.2em;
             line-height: 1.3em;
         }
 
@@ -44,7 +45,7 @@
             margin-bottom: 1.5rem;
         }
 
-        p { margin-bottom: 1.2em; }
+        p { margin-bottom: 1.6em; }
 
         /* --- 3. CONTAINER --- */
         .main-container {
@@ -58,13 +59,12 @@
             flex-direction: column;
         }
 
-        /* --- 4. TAB NAVIGATIE (BOVENAAN - BLIJFT OOK STICKY) --- */
+        /* --- 4. TAB NAVIGATIE --- */
         .tab-nav {
             display: flex;
             background-color: #eee;
             border-bottom: 3px solid var(--primary);
             flex-wrap: wrap;
-            position: -webkit-sticky;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -72,11 +72,9 @@
             box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
         }
 
-        /* Ankerpunt voor het scrollen */
-        #scroll-anchor {
+        #nav-anchor {
             position: absolute;
             top: -20px;
-            left: 0;
         }
 
         .tab-link {
@@ -94,9 +92,6 @@
             border-radius: 8px 8px 0 0; 
         }
 
-        .tab-link:first-child { border-top-left-radius: 8px; }
-        .tab-link:last-child { border-top-right-radius: 8px; }
-
         .tab-link:hover { background-color: #e0e0e0; color: var(--primary); }
         .tab-link.active { background-color: var(--white); color: var(--primary); border-top: 4px solid var(--primary); margin-top: -4px; }
 
@@ -105,7 +100,6 @@
             padding: 40px;
             animation: fadeIn 0.6s;
             flex-grow: 1;
-            position: relative; /* Voor het ankerpunt */
         }
 
         /* --- 5. INTENTIE BOX --- */
@@ -120,7 +114,7 @@
         .intentie-title {
             font-size: 1.6rem;
             font-weight: 700;
-            margin-bottom: 0.3em;
+            margin-bottom: 0.5em;
             color: var(--primary);
             display: block;
             font-family: 'Poppins', sans-serif;
@@ -156,48 +150,10 @@
             border: 1px solid #ddd;
             padding: 30px;
             border-radius: 8px;
-            margin-bottom: 30px;
-        }
-        .update-block h3 { margin-bottom: 15px; font-size: 1.3rem; }
-
-        /* --- 8. CTA BUTTONS --- */
-        .appeal-text {
-            text-align: center;
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 20px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 10px;
         }
 
-        .cta-footer {
-            margin-top: auto;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            text-align: center;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: var(--white);
-            text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
-            transition: background 0.3s;
-            min-width: 200px;
-            text-align: center;
-        }
-        .btn:hover { background-color: #600000; }
-
-        /* --- 9. ZWEVEND ONDER-MENU (DOCK) --- */
+        /* --- 8. ZWEVEND ONDER-MENU (DOCK) --- */
         .floating-dock {
             position: fixed;
             bottom: 20px;
@@ -230,40 +186,15 @@
             gap: 5px;
         }
 
-        .dock-btn:hover {
-            background-color: var(--primary-light-bg);
-            color: var(--primary);
-        }
+        .dock-btn:hover { background-color: var(--primary-light-bg); color: var(--primary); }
+        .dock-btn.active { background-color: var(--primary); color: var(--white); }
+        .dock-separator { width: 1px; background-color: #ddd; margin: 0 5px; }
 
-        .dock-btn.active {
-            background-color: var(--primary);
-            color: var(--white);
-        }
-
-        .dock-separator {
-            width: 1px;
-            background-color: #ddd;
-            margin: 0 5px;
-        }
-
-        /* Mobiel aanpassing voor dock */
         @media (max-width: 600px) {
-            .floating-dock {
-                width: 90%;
-                justify-content: space-between;
-                bottom: 10px;
-                padding: 10px;
-            }
-            .dock-btn {
-                padding: 8px;
-                font-size: 0.8rem;
-            }
-            .btn-text { display: none; } /* Verberg tekst op heel klein scherm, toon alleen icon/nummer */
-            .dock-btn::after { content: attr(data-label); } /* Fallback als text weg is */
-        }
-        @media (min-width: 601px) {
-            .btn-text { display: inline; }
-            .dock-btn::after { content: ""; }
+            .floating-dock { width: 90%; justify-content: space-between; bottom: 10px; padding: 10px; }
+            .dock-btn { padding: 8px; font-size: 0.8rem; }
+            .btn-text { display: none; }
+            .dock-btn::after { content: attr(data-label); }
         }
 
         @keyframes fadeIn {
@@ -286,7 +217,6 @@
     </div>
 
     <div id="Tab1" class="tab-content" style="display: block;">
-        
         <div class="intentie-box">
             <span class="intentie-title">Onze Intentie</span>
             <span style="font-size: 1.1rem; font-weight: 600; color: #444;">Wij hebben het vaste voornemen om de toekomst van deze twee waardevolle kennisbronnen zeker te stellen.</span>
@@ -308,46 +238,37 @@
             <div class="tile">
                 <div class="tile-icon">🏛️</div>
                 <h4>25 Jaar Ervaring</h4>
-                <p>Wij zijn niet gisteren begonnen. Beide websites zijn ontstaan in 2000 en 2001. Dit is geen statisch archief, maar een levend organisme. Het 'à la une' houden van de content is een continue proces en terugkerende taak.</p>
+                <p>Wij zijn niet gisteren begonnen. Beide websites zijn ontstaan in 2000 en 2001. Dit is geen statisch archief, maar een levend organisme. Het 'à la une' houden van de content is een continue proces.</p>
             </div>
         </div>
 
         <div class="update-block">
             <h3>Modernisering & Toekomst</h3>
-            <p>In het afgelopen jaar is hard gewerkt aan het actualiseren van de content van Infofrankrijk. Deze is ook toekomstbestendig gemaakt. U treft interactieve tools aan die de gebruiker kunnen helpen om inzicht en meer kennis te krijgen over zaken die contextueel (persoons- en situatie-gerelateerd) passen bij het scenario dat door de gebruiker zelf wordt geschetst.</p>
+            <p>In het afgelopen jaar is hard gewerkt aan het actualiseren van de content van Infofrankrijk. Deze is ook toekomstbestendig gemaakt. U treft interactieve tools aan die de gebruiker kunnen helpen om inzicht en meer kennis te krijgen over zaken die contextueel passen bij de gebruiker.</p>
             <p>Dossiers werden - en worden - actueel gemaakt. De gebruikersinterface werd professioneler en vooral rustiger gemaakt. Infofrankrijk.com zal bovendien onafhankelijk zijn van adverteerders, marketing-algoritmes en sponsors.</p>
-            <p>Ook heeft een moderniseringsslag achter de schermen van Nederlanders.fr plaatsgevonden. Misschien minder zichtbaar maar, wees verzekerd, daardoor is een robuuste forum-omgeving ontstaan die toekomstbestendig is.</p>
-        </div>
-
-        <div class="appeal-text">
-            Wij hopen op uw betrokkenheid en waardering. Help ons mee om de instandhouding van de websites te bekostigen.
-        </div>
-
-        <div class="cta-footer">
-            <a href="https://infofrankrijk.tempurl.host/abonnement/" class="btn">Word Abonnee</a>
-            <a href="https://www.nederlanders.fr/page/fundraising-en-donaties" class="btn">Word Donateur</a>
+            <p>Ook heeft een moderniseringsslag achter de schermen van Nederlanders.fr plaatsgevonden. Dit zorgt voor een robuuste forum-omgeving die toekomstbestendig is.</p>
         </div>
     </div>
 
     <div id="Tab2" class="tab-content">
         <h2>Over Nederlanders.fr</h2>
-        <p>Dé online gemeenschap van Nederlandstaligen in Frankrijk. Met 25.000+ leden en 300.000 pageviews per maand. <br><strong>Kostendekking via sponsoring, advertenties van leden en solidariteitsbijdragen (donaties).</strong></p>
+        <p>Dé online gemeenschap van Nederlandstaligen in Frankrijk. Met 25.000+ leden en 300.000 pageviews per maand. <br><strong>Kostendekking via sponsoring, advertenties van leden en solidariteitsbijdragen.</strong></p>
         
         <div class="grid-container">
             <div class="tile">
                 <div class="tile-icon">💬</div>
                 <h4>Het interactieve forum</h4>
-                <p>Dagelijks worden nieuwe berichten geplaatst, vaak nadat de plaatser werd geholpen met de opmaak. Iedere dag verwelkomen we nieuwe leden. We staan 365 dagen per jaar klaar om een - hopelijk onzichtbare - moderatorrol te vervullen.</p>
+                <p>Dagelijks worden nieuwe berichten geplaatst. We staan 365 dagen per jaar klaar om een moderatorrol te vervullen.</p>
             </div>
             <div class="tile">
                 <div class="tile-icon">🚗</div>
                 <h4>Vervoersmarkt</h4>
-                <p>Een actieve marktplaats voor de Liftcentrale, uitwisseling van treinkaartjes en transport van pakketjes tot complete inboedels.</p>
+                <p>Een actieve marktplaats voor de Liftcentrale en transport van pakketjes tot complete inboedels.</p>
             </div>
             <div class="tile">
                 <div class="tile-icon">📰</div>
                 <h4>Nieuwsdienst</h4>
-                <p>Dagelijks geselecteerd nieuws uit meer dan 100 bronnen (kranten, blogs), relevant voor onze bezoekers.</p>
+                <p>Dagelijks geselecteerd nieuws uit meer dan 100 bronnen, relevant voor onze bezoekers.</p>
             </div>
             <div class="tile">
                 <div class="tile-icon">📍</div>
@@ -357,13 +278,8 @@
             <div class="tile">
                 <div class="tile-icon">👥</div>
                 <h4>Groepen</h4>
-                <p>Van regionale groepen (per departement) tot "Special interest" groepen voor hobby's en thema's.</p>
+                <p>Van regionale groepen tot "Special interest" groepen voor hobby's en thema's.</p>
             </div>
-        </div>
-
-        <div class="cta-footer">
-            <a href="https://infofrankrijk.tempurl.host/abonnement/" class="btn">Word Abonnee</a>
-            <a href="https://www.nederlanders.fr/page/fundraising-en-donaties" class="btn">Word Donateur</a>
         </div>
     </div>
 
@@ -375,51 +291,35 @@
             <div class="tile">
                 <div class="tile-icon">📚</div>
                 <h4>Archief</h4>
-                <p>Een gestructureerd en doorzoekbaar archief. Actualisering vindt nu en in de toekomst dagelijks plaats.</p>
+                <p>Een gestructureerd en doorzoekbaar archief. Actualisering vindt dagelijks plaats.</p>
             </div>
             <div class="tile">
                 <div class="tile-icon">🛠️</div>
                 <h4>Klussen</h4>
-                <p>Een rijke kennisbron voor klussers in Frankrijk. 20+ jaar aan "Frankrijkkennis" van ervaren klussers.</p>
+                <p>Een rijke kennisbron voor klussers in Frankrijk. 20+ jaar aan Frankrijkkennis.</p>
             </div>
             <div class="tile">
                 <div class="tile-icon">🏠</div>
                 <h4>Vastgoedgidsen</h4>
-                <p>Duidelijke handleidingen voor het kopen - en verkopen - van vastgoed in Frankrijk.</p>
+                <p>Duidelijke handleidingen voor het kopen en verkopen van vastgoed in Frankrijk.</p>
             </div>
             <div class="tile">
                 <div class="tile-icon">💼</div>
                 <h4>Diverse dossiers</h4>
-                <p>Diepgaande dossiers over ondernemen, klussen, wonen, leven, integreren enz.</p>
+                <p>Diepgaande dossiers over ondernemen, klussen, wonen en integreren.</p>
             </div>
             <div class="tile">
                 <div class="tile-icon">🔢</div>
-                <h4>Diverse rekentools</h4>
-                <p>Koppelingen met Franse databases, financiële simulatie-instrumenten, Plus value berekeningen en vastgoedtransactiekosten.</p>
-            </div>
-            <div class="tile">
-                <div class="tile-icon">⚡</div>
-                <h4>Simulatietools</h4>
-                <p>Geavanceerde simulatiemodellen (zoals energieverbruik) met koppelingen naar betrouwbare Franse bronnen.</p>
-            </div>
-            <div class="tile">
-                <div class="tile-icon">🗺️</div>
-                <h4>In de buurt</h4>
-                <p>Met invoer van uw postcode krijgt u direct een overzicht van overheden en handige adressen in uw eigen buurt.</p>
+                <h4>Rekentools</h4>
+                <p>Koppelingen met Franse databases, simulatie-instrumenten en vastgoedberekeningen.</p>
             </div>
             <div class="tile">
                 <div class="tile-icon">🔐</div>
                 <h4>Persoonlijk Dashboard</h4>
-                <p><em>(Voorjaar 2026)</em> U maakt uw eigen dashboard met informatie die voor u relevant is, met opslag op uw eigen computer.</p>
+                <p><em>(Voorjaar 2026)</em> Maak uw eigen dashboard met informatie die voor u relevant is.</p>
             </div>
         </div>
-
-        <div class="cta-footer">
-            <a href="https://infofrankrijk.tempurl.host/abonnement/" class="btn">Word Abonnee</a>
-            <a href="https://www.nederlanders.fr/page/fundraising-en-donaties" class="btn">Word Donateur</a>
-        </div>
     </div>
-
 </div>
 
 <div class="floating-dock">
@@ -433,53 +333,34 @@
         <span class="btn-text">3. InfoFR</span>
     </button>
     <div class="dock-separator"></div>
-    <button class="dock-btn" onclick="scrollToNav()">
-        ⬆
-    </button>
+    <button class="dock-btn" onclick="scrollToNav()">⬆</button>
 </div>
 
 <script>
-    // Algemene Functie om Tabs te wisselen
     function openTab(evt, tabName) {
         var i, tabcontent, tablinks;
-        
-        // Verberg alles
         tabcontent = document.getElementsByClassName("tab-content");
         for (i = 0; i < tabcontent.length; i++) {
             tabcontent[i].style.display = "none";
         }
-
-        // Deactiveer top navigatie buttons
         tablinks = document.getElementsByClassName("tab-link");
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
-
-        // Toon nieuwe tab
         document.getElementById(tabName).style.display = "block";
-        
-        // Activeer de juiste knop in de TOP navigatie
-        // (We doen dit door te zoeken naar de button die deze functie aanroept)
         if (evt && evt.currentTarget) {
              evt.currentTarget.className += " active";
         } else {
-            // Als de functie via het Dock wordt aangeroepen, moeten we de top-nav knop handmatig vinden
-            var topNavBtnIndex = tabName.replace("Tab", "") - 1; // Tab1 -> index 0
+            var topNavBtnIndex = tabName.replace("Tab", "") - 1;
             if(tablinks[topNavBtnIndex]) {
                 tablinks[topNavBtnIndex].className += " active";
             }
         }
     }
 
-    // Functie voor het ZWEVENDE MENU (Dock)
     function dockNav(tabName, btnId) {
-        // 1. Open de tab (gebruik null als evt omdat we geen click event van de top-nav hebben)
         openTab(null, tabName);
-
-        // 2. Scroll naar boven (naar de tabs)
         scrollToNav();
-
-        // 3. Update active state van het DOCK zelf
         var dockBtns = document.getElementsByClassName("dock-btn");
         for (var i = 0; i < dockBtns.length; i++) {
             dockBtns[i].className = dockBtns[i].className.replace(" active", "");
@@ -487,11 +368,8 @@
         document.getElementById(btnId).className += " active";
     }
 
-    // Scroll functie
     function scrollToNav() {
-        document.getElementById('nav-anchor').scrollIntoView({ 
-            behavior: 'smooth' 
-        });
+        document.getElementById('nav-anchor').scrollIntoView({ behavior: 'smooth' });
     }
 </script>
 
