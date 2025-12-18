@@ -7,29 +7,29 @@
     <title>Infofrankrijk & Nederlanders.fr | Visie</title>
     <style>
         /* --- 1. FONTS & VARIABELEN --- */
-        @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600&family=Poppins:wght@300;500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600&family=Poppins:wght@400;500;600&display=swap');
 
         :root {
-            --primary: #800000; /* Maroon */
-            --primary-soft: rgba(128, 0, 0, 0.05);
-            --accent-yellow: #FFFBE6; /* Zacht geel */
+            --primary: #800000;
+            --primary-soft: rgba(128, 0, 0, 0.04);
+            --accent-yellow: #FFFBE6;
             --text-dark: #2C2C2C;
             --text-light: #5F5F5F;
             --white: #ffffff;
-            --bg-body: #FAFAFA;
-            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --bg-body: #F7F7F7;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
         }
 
         /* --- 2. ALGEMENE STIJL --- */
         body {
             font-family: 'Mulish', sans-serif;
-            line-height: 1.8em; /* Ruime regelafstand conform instructie */
+            line-height: 1.8em; 
             color: var(--text-dark);
             background-color: var(--bg-body);
             margin: 0;
             padding: 40px 20px;
             padding-bottom: 120px;
-            -webkit-font-smoothing: antialiased;
         }
 
         h1, h2, h3, h4 {
@@ -37,186 +37,164 @@
             color: var(--primary);
             font-weight: 500;
             margin-top: 0;
-            letter-spacing: -0.02em;
         }
 
         h1 {
             text-align: center;
-            font-size: 2.8rem;
-            margin-bottom: 3rem;
-            font-weight: 300;
+            font-size: 2.4rem;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
         }
 
-        h2 { font-size: 2rem; margin-bottom: 1.5rem; }
-
-        p { margin-bottom: 1.8em; color: var(--text-light); }
+        p { margin-bottom: 1.6em; color: var(--text-light); }
 
         /* --- 3. CONTAINER --- */
         .main-container {
             max-width: 1100px;
             margin: 0 auto;
             background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
-            min-height: 70vh;
+            border-radius: 12px;
+            box-shadow: 0 4px 25px rgba(0,0,0,0.05);
             overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- 4. MINIMALISTISCHE NAVIGATIE --- */
+        /* --- 4. VERBETERDE TAB NAVIGATIE --- */
         .tab-nav {
             display: flex;
-            justify-content: center;
-            background-color: var(--white);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background-color: #F0F0F0;
+            padding: 0;
+            border-bottom: 2px solid var(--primary);
         }
 
         .tab-link {
-            padding: 15px 30px;
+            flex: 1;
+            padding: 20px;
             border: none;
-            background: none;
+            background: #F0F0F0;
             font-family: 'Poppins', sans-serif;
             font-weight: 500;
-            font-size: 0.95rem;
-            color: var(--text-light);
+            font-size: 0.9rem;
+            color: #777;
             cursor: pointer;
             transition: var(--transition);
-            position: relative;
-            letter-spacing: 0.05em;
             text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-right: 1px solid rgba(0,0,0,0.05);
         }
 
-        .tab-link::after {
-            content: '';
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: var(--transition);
-            transform: translateX(-50%);
+        .tab-link:last-child { border-right: none; }
+
+        .tab-link:hover {
+            background-color: #E8E8E8;
+            color: var(--primary);
         }
 
-        .tab-link:hover { color: var(--primary); }
-        .tab-link.active { color: var(--primary); }
-        .tab-link.active::after { width: 30px; }
+        .tab-link.active {
+            background-color: var(--white);
+            color: var(--primary);
+            font-weight: 600;
+        }
 
         .tab-content {
             display: none;
-            padding: 60px;
-            animation: fadeIn 0.8s ease;
+            padding: 50px;
+            animation: fadeIn 0.5s ease;
         }
 
-        /* --- 5. INTENTIE BOX (TRANSPARANT ACCENT) --- */
+        /* --- 5. INTENTIE BOX --- */
         .intentie-box {
             background-color: var(--primary-soft);
-            padding: 40px;
-            border-radius: 15px;
-            margin-bottom: 50px;
+            padding: 35px;
+            border-radius: 8px;
+            margin-bottom: 45px;
             text-align: center;
-            border: 1px solid rgba(128, 0, 0, 0.1);
+            border: 1px solid rgba(128, 0, 0, 0.08);
         }
 
         .intentie-title {
             font-family: 'Poppins', sans-serif;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             color: var(--primary);
             display: block;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .intentie-text {
-            font-size: 1.4rem;
-            font-weight: 300;
+            font-size: 1.3rem;
+            font-weight: 400;
             color: var(--text-dark);
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
-            line-height: 1.6em;
         }
 
-        /* --- 6. ELEGANT GRID --- */
+        /* --- 6. GRID MET OMKADERDE TEGELS --- */
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
+            gap: 25px;
+            margin-bottom: 40px;
         }
 
         .tile {
+            background: var(--white);
+            border: 1px solid var(--border-light);
+            padding: 30px;
+            border-radius: 10px;
             transition: var(--transition);
-            padding: 20px;
-            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
         }
 
         .tile:hover {
-            background: var(--bg-body);
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            transform: translateY(-2px);
         }
 
         .tile-icon-wrapper {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background-color: var(--accent-yellow);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 25px;
-            font-size: 1.5rem;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-
-        .tile:hover .tile-icon-wrapper {
-            transform: scale(1.1) rotate(5deg);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            border: 1px solid rgba(128, 0, 0, 0.05);
         }
 
         .tile h4 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
             color: var(--primary);
         }
 
         .tile p {
             font-size: 0.95rem;
-            line-height: 1.7em;
+            line-height: 1.6em;
+            margin: 0;
         }
 
-        /* --- 7. CHIQUE UPDATE BLOCK --- */
-        .update-block {
-            border-top: 1px solid rgba(0,0,0,0.05);
-            padding-top: 50px;
-            margin-top: 20px;
-        }
-
-        .update-block h3 {
-            font-size: 1.5rem;
-            margin-bottom: 25px;
-        }
-
-        /* --- 8. ZWEVEND MENU (CHIQUE DOCK) --- */
+        /* --- 7. ZWEVEND MENU --- */
         .floating-dock {
             position: fixed;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(15px);
-            padding: 8px;
-            border-radius: 100px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 6px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: flex;
-            align-items: center;
-            gap: 10px;
+            gap: 5px;
             z-index: 9999;
-            border: 1px solid rgba(255,255,255,0.5);
+            border: 1px solid var(--border-light);
         }
 
         .dock-btn {
@@ -224,117 +202,106 @@
             border: none;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
-            font-weight: 500;
-            color: var(--text-light);
-            font-size: 0.85rem;
-            padding: 10px 20px;
-            border-radius: 100px;
+            font-size: 0.8rem;
+            padding: 8px 18px;
+            border-radius: 50px;
             transition: var(--transition);
+            color: var(--text-light);
         }
 
-        .dock-btn:hover { color: var(--primary); background: var(--white); }
+        .dock-btn:hover { color: var(--primary); }
         .dock-btn.active { background-color: var(--primary); color: var(--white); }
 
-        .dock-separator { width: 1px; height: 20px; background-color: rgba(0,0,0,0.1); margin: 0 5px; }
-
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 768px) {
-            .tab-content { padding: 30px; }
-            h1 { font-size: 2rem; }
-            .tab-link { padding: 10px 15px; font-size: 0.8rem; }
+            .tab-nav { flex-direction: column; }
+            .tab-link { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.05); }
+            .tab-content { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
 <div class="main-container">
-    <div id="nav-anchor"></div>
-    
     <div class="tab-nav">
-        <button class="tab-link active" onclick="openTab(event, 'Tab1')">Visie</button>
-        <button class="tab-link" onclick="openTab(event, 'Tab2')">Nederlanders.fr</button>
-        <button class="tab-link" onclick="openTab(event, 'Tab3')">Infofrankrijk</button>
+        <button class="tab-link active" onclick="openTab(event, 'Tab1')">1. Visie</button>
+        <button class="tab-link" onclick="openTab(event, 'Tab2')">2. Nederlanders.fr</button>
+        <button class="tab-link" onclick="openTab(event, 'Tab3')">3. Infofrankrijk</button>
     </div>
 
     <div id="Tab1" class="tab-content" style="display: block;">
         <div class="intentie-box">
-            <span class="intentie-title">Onze Belofte</span>
-            <div class="intentie-text">Wij borgen de continuïteit van twee essentiële kennisbronnen voor de Nederlandstalige gemeenschap in Frankrijk.</div>
+            <span class="intentie-title">Onze Toewijding</span>
+            <div class="intentie-text">Het waarborgen van de toekomst van twee onmisbare bronnen voor Nederlandstaligen in Frankrijk.</div>
         </div>
 
         <div class="grid-container">
             <div class="tile">
                 <div class="tile-icon-wrapper">💬</div>
                 <h4>Het Hart</h4>
-                <p>Nederlanders.fr fungeert als het kloppende sociale hart. Een plek voor ontmoeting, verhalen en directe interactie tussen landgenoten.</p>
+                <p>Nederlanders.fr is de interactieve ontmoetingsplek. Een levendig platform voor dialoog, advies en onderlinge verbinding.</p>
             </div>
             
             <div class="tile">
                 <div class="tile-icon-wrapper">🧠</div>
                 <h4>Het Hoofd</h4>
-                <p>Infofrankrijk biedt het fundament: een diepgaand archief over wonen en leven, ondersteund door geavanceerde rekenmodules.</p>
+                <p>Infofrankrijk biedt een solide fundament van kennis. Van complexe dossiers tot praktische simulatietools.</p>
             </div>
 
             <div class="tile">
                 <div class="tile-icon-wrapper">🏛️</div>
-                <h4>Erfgoed</h4>
-                <p>Sinds 2000 bouwen wij aan dit digitale ecosysteem. Geen statisch archief, maar een levende bron die dagelijks wordt gevoed.</p>
+                <h4>25 Jaar Expertise</h4>
+                <p>Beide platforms zijn diep geworteld in de gemeenschap. Wij beheren geen statisch archief, maar een actueel ecosysteem.</p>
             </div>
-        </div>
-
-        <div class="update-block">
-            <h3>Modernisering & Toekomst</h3>
-            <p>Het afgelopen jaar stond in het teken van verfijning. Infofrankrijk is getransformeerd tot een onafhankelijk platform, vrij van advertentie-algoritmes, waar de focus ligt op zuivere informatievoorziening en interactieve tools.</p>
-            <p>Achter de schermen van Nederlanders.fr is een robuuste fundering gelegd. Deze onzichtbare modernisering garandeert een veilige en toekomstbestendige forum-omgeving voor onze tienduizenden leden.</p>
         </div>
     </div>
 
     <div id="Tab2" class="tab-content">
-        <h2>De Gemeenschap</h2>
-        <p>Nederlanders.fr is dé ontmoetingsplek met ruim 25.000 leden. Een organisch platform waar solidariteit en informatie hand in hand gaan.</p>
+        <h2>Nederlanders.fr</h2>
+        <p>Een gemeenschap van 25.000+ leden die elkaar dagelijks ondersteunen bij het leven in Frankrijk.</p>
         
         <div class="grid-container">
             <div class="tile">
                 <div class="tile-icon-wrapper">🤝</div>
                 <h4>Moderatie</h4>
-                <p>Wij waken 365 dagen per jaar over de kwaliteit van de dialoog, vaak onzichtbaar maar altijd aanwezig.</p>
+                <p>Kwaliteitsbewaking door een toegewijd team, zodat de dialoog altijd constructief en waardevol blijft.</p>
             </div>
             <div class="tile">
                 <div class="tile-icon-wrapper">🚛</div>
-                <h4>Logistiek</h4>
-                <p>Van de Liftcentrale tot complete inboedels; de gemeenschap helpt elkaar bij elke stap over de grens.</p>
+                <h4>Vervoer & Markt</h4>
+                <p>Een unieke marktplaats voor transport, liftcentrale en de uitwisseling van goederen en diensten.</p>
             </div>
             <div class="tile">
-                <div class="tile-icon-wrapper">📰</div>
-                <h4>Actualiteit</h4>
-                <p>Een curator-dienst die dagelijks het meest relevante nieuws uit honderden bronnen voor u selecteert.</p>
+                <div class="tile-icon-wrapper">📍</div>
+                <h4>De Nedergids</h4>
+                <p>Vind eenvoudig Nederlandstalige professionals en dienstverleners in uw specifieke regio.</p>
             </div>
         </div>
     </div>
 
     <div id="Tab3" class="tab-content">
-        <h2>De Kennisbank</h2>
-        <p>Infofrankrijk.com biedt de diepgang die nodig is voor succesvol wonen en werken in Frankrijk.</p>
+        <h2>Infofrankrijk.com</h2>
+        <p>De meest uitgebreide kennisbron over "Wonen en Leven" in Frankrijk, volledig onafhankelijk en actueel.</p>
 
         <div class="grid-container">
             <div class="tile">
-                <div class="tile-icon-wrapper">🛠️</div>
-                <h4>Vakmanschap</h4>
-                <p>Twee decennia aan expertise over Franse bouwtechnieken en renovatieprojecten, direct toegankelijk.</p>
+                <div class="tile-icon-wrapper">📚</div>
+                <h4>Kennisdossiers</h4>
+                <p>Diepgaande informatie over juridische, fiscale en praktische zaken rondom emigratie en vastgoed.</p>
             </div>
             <div class="tile">
-                <div class="tile-icon-wrapper">📊</div>
-                <h4>Simulatie</h4>
-                <p>Geavanceerde rekentools voor Plus Value, overdrachtskosten en financiële scenario-planning.</p>
+                <div class="tile-icon-wrapper">🔢</div>
+                <h4>Rekentools</h4>
+                <p>Simuleer kosten voor vastgoedtransacties, energieverbruik en fiscale verplichtingen met actuele Franse data.</p>
             </div>
             <div class="tile">
-                <div class="tile-icon-wrapper">🛡️</div>
-                <h4>Privacy</h4>
-                <p>Vanaf 2026 introduceert Infofrankrijk het persoonlijke dashboard: uw eigen veilige haven voor data.</p>
+                <div class="tile-icon-wrapper">🔐</div>
+                <h4>Persoonlijk</h4>
+                <p>Exclusieve toegang tot tools en vanaf 2026 uw eigen "Wonen en Leven" dashboard op uw computer.</p>
             </div>
         </div>
     </div>
@@ -344,8 +311,7 @@
     <button class="dock-btn active" id="dock-btn-1" onclick="dockNav('Tab1', 'dock-btn-1')">Visie</button>
     <button class="dock-btn" id="dock-btn-2" onclick="dockNav('Tab2', 'dock-btn-2')">NL.fr</button>
     <button class="dock-btn" id="dock-btn-3" onclick="dockNav('Tab3', 'dock-btn-3')">InfoFR</button>
-    <div class="dock-separator"></div>
-    <button class="dock-btn" onclick="scrollToNav()">↑</button>
+    <button class="dock-btn" onclick="scrollToTop()">↑</button>
 </div>
 
 <script>
@@ -371,7 +337,7 @@
 
     function dockNav(tabName, btnId) {
         openTab(null, tabName);
-        scrollToNav();
+        scrollToTop();
         var dockBtns = document.getElementsByClassName("dock-btn");
         for (var i = 0; i < dockBtns.length; i++) {
             dockBtns[i].className = dockBtns[i].className.replace(" active", "");
@@ -379,7 +345,7 @@
         document.getElementById(btnId).className += " active";
     }
 
-    function scrollToNav() {
+    function scrollToTop() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 </script>
